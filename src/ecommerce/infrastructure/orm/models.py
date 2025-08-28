@@ -1,18 +1,14 @@
-from sqlalchemy import Column, Integer, String, Enum, DateTime, func, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DECIMAL, Enum, DateTime, Text
 from sqlalchemy.orm import relationship
-import enum
+from sqlalchemy.sql import func
+from enum import Enum as PyEnum
+from src.ecommerce.infrastructure.storage.db import Base # Import Base from db.py
 
-from src.ecommerce.domain.entities.users.role import Role
-from src.ecommerce.infrastructure.storage.db import Base
 
-
-class UserStatus(str, enum.Enum):
+class UserStatus(str, PyEnum):
     active = "active"
     inactive = "inactive"
     banned = "banned"
-
-
-
 
 class UserORM(Base):
     __tablename__ = "users"
@@ -28,3 +24,5 @@ class UserORM(Base):
     created_at    = Column(DateTime, server_default=func.current_timestamp(), nullable=False)
     updated_at    = Column(DateTime, server_default=func.current_timestamp(),
                            onupdate=func.current_timestamp(), nullable=False)
+
+
