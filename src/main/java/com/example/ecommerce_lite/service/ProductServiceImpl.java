@@ -53,6 +53,16 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
+    @Override
+    public List<ProductResponseDto> getProductsByName(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name).stream().map(this::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Long> getProductIdsByName(String name) {
+        return productRepository.findByNameContainingIgnoreCase(name).stream().map(Product::getId).collect(Collectors.toList());
+    }
+
     private ProductResponseDto toDto(Product product) {
         return new ProductResponseDto(product.getId(), product.getProductCode(), product.getName(), product.getCategory() != null ? product.getCategory().getId() : null, product.getDescription(), product.getMongoRefId(), product.getMetaDescription(), product.getSlugId(), product.getActiveness());
     }
