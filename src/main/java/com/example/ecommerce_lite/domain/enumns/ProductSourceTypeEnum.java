@@ -1,25 +1,26 @@
 package com.example.ecommerce_lite.domain.enumns;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
 @Getter
 public enum ProductSourceTypeEnum {
 
-    DROPSHIPPING(1, 'D', "DROPSHIPPING", "Product is fulfilled by a third-party supplier via dropshipping."),
-    VENDOR(2, 'V', "VENDOR", "Product is sourced directly from a registered vendor or supplier."),
-    LOCAL(3, 'L', "LOCAL", "Product is produced or procured locally by the store."),
-    MANUFACTURER(4, 'M', "MANUFACTURER", "Product is supplied directly from the manufacturer."),
-    WHOLESALE(5, 'W', "WHOLESALE", "Product purchased in bulk from a wholesaler."),
-    IMPORTED(6, 'I', "IMPORTED", "Product is imported from a foreign market or partner."),
-    AFFILIATE(7, 'A', "AFFILIATE", "Product is promoted through affiliate partnership.");
+    DROPSHIPPING(1, "D", "DROPSHIPPING", "Product is fulfilled by a third-party supplier via dropshipping."),
+    VENDOR(2, "V", "VENDOR", "Product is sourced directly from a registered vendor or supplier."),
+    LOCAL(3, "L", "LOCAL", "Product is produced or procured locally by the store."),
+    MANUFACTURER(4, "M", "MANUFACTURER", "Product is supplied directly from the manufacturer."),
+    WHOLESALE(5, "W", "WHOLESALE", "Product purchased in bulk from a wholesaler."),
+    IMPORTED(6, "I", "IMPORTED", "Product is imported from a foreign market or partner."),
+    AFFILIATE(7, "A", "AFFILIATE", "Product is promoted through affiliate partnership.");
 
     private final int id;
 
-    private final char code;
+    private final String code;
     private final String value;
     private final String description;
 
-    ProductSourceTypeEnum(int id, char code, String value, String description) {
+    ProductSourceTypeEnum(int id, String code, String value, String description) {
         this.id = id;
         this.code = code;
         this.value = value;
@@ -27,7 +28,7 @@ public enum ProductSourceTypeEnum {
     }
 
     /** Lookup by code */
-    public static ProductSourceTypeEnum fromCode(char code) {
+    public static ProductSourceTypeEnum fromCode(String code) {
         for (ProductSourceTypeEnum type : values()) {
             if (type.code == code) {
                 return type;
@@ -55,4 +56,6 @@ public enum ProductSourceTypeEnum {
         }
         throw new IllegalArgumentException("Unknown ProductSourceType value: " + value);
     }
+
+
 }
